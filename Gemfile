@@ -30,6 +30,8 @@ gem 'omniauth'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'pundit'
 gem 'rack-attack'
+gem 'kaminari'
+gem 'api-pagination'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
