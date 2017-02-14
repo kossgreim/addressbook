@@ -26,6 +26,7 @@ gem 'puma', '~> 3.0'
 
 gem 'rack-cors'
 gem 'devise_token_auth'
+gem 'omniauth'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'pundit'
 gem 'rack-attack'
