@@ -7,8 +7,6 @@ module Api::V1
       render json: { errors: error.message }, status: :not_found
     end
 
-    private
-
     def render_error(resource, status)
       render json: resource,
              status: status,
