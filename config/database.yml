@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: addressbook_production
-  username: addressbook
-  password: <%= ENV['ADDRESSBOOK_DATABASE_PASSWORD'] %>
+  #username: addressbook
+  #password: <%= ENV['ADDRESSBOOK_DATABASE_PASSWORD'] %>
