@@ -50,7 +50,6 @@ RSpec.configure do |config|
 
   config.include Requests::JsonHelpers, type: :request
   config.include Requests::JsonAPI, type: :request
-  config.include AuthenticationHelper, type: :request
 
   # Setup database cleaner
   config.before(:suite) do
