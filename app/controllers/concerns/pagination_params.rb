@@ -4,6 +4,6 @@ module PaginationParams
   private
 
   def pagination_params
-    params.require(:page).permit(:size, :number)
+    params.fetch(:page, {}).permit(:size, :number)
   end
 end
