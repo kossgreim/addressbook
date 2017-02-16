@@ -5,7 +5,9 @@ module Api::V1
     include PaginationParams
 
     def index
-      render json: Organization.paginate(pagination_params)
+      organizations = Organization.paginate(pagination_params)
+
+      render json: organizations
     end
 
     def show
