@@ -1,5 +1,6 @@
 module Api::V1
   class ApiController < ApplicationController
+    include DeviseTokenAuth::Concerns::SetUserByToken
     rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
 
     private

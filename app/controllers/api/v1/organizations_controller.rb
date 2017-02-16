@@ -1,6 +1,6 @@
 module Api::V1
   class OrganizationsController < ApiController
-
+    before_action :authenticate_v1_user!, except: [:index]
     before_action :set_organization, only: [:show, :update, :destroy]
     include PaginationParams
 
