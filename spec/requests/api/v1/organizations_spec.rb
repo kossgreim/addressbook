@@ -4,11 +4,14 @@ RSpec.describe 'organizations API', type: :request do
   # initialize test data
   let!(:organizations) { create_list(:organization, 5) }
   let(:organization_id) { organizations.first.id.to_s }
+  let(:user) { create(:user) }
 
   # Test suite for GET /v1/organizations
   describe 'GET /v1/organizations' do
     # make HTTP get request before each example
-    before { get '/v1/organizations' }
+    before do
+      get v1_organizations_path, headers: user.create_new_auth_token
+    end
 
     it 'returns organizations' do
       # Note `json` is a custom helper to parse JSON responses
@@ -23,7 +26,9 @@ RSpec.describe 'organizations API', type: :request do
 
   # Test suite for GET /v1/organizations/:id
   describe 'GET /v1/organizations/:id' do
-    before { get "/v1/organizations/#{organization_id}" }
+    before do
+      get "/v1/organizations/#{organization_id}",  headers: user.create_new_auth_token
+    end
 
     context 'when the record exists' do
       it 'returns the organization' do
@@ -55,7 +60,11 @@ RSpec.describe 'organizations API', type: :request do
     let(:valid_attributes) { attributes_for(:organization) }
 
     context 'when the request is valid' do
-      before { post '/v1/organizations', params: create_request('organizations', valid_attributes) }
+      before do
+        post '/v1/organizations',
+             params: create_request('organizations', valid_attributes),
+             headers: user.create_new_auth_token
+      end
 
       it 'creates a organization' do
         expect(response_attribute('name')).to eq(valid_attributes[:name])
@@ -67,7 +76,11 @@ RSpec.describe 'organizations API', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/v1/organizations', params: create_request('organizations', { name: '1' }) }
+      before do
+        post '/v1/organizations',
+             params: create_request('organizations', { name: '1' }),
+             headers: user.create_new_auth_token
+      end
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -79,14 +92,15 @@ RSpec.describe 'organizations API', type: :request do
     end
   end
 
-  # Test suite for PUT /v1/organizations/:id
-  describe 'PUT /v1/organizations/:id' do
+  # Test suite for PATCH /v1/organizations/:id
+  describe 'PATCH /v1/organizations/:id' do
     let(:valid_attributes) { attributes_for(:organization) }
 
     context 'when the record exists' do
       before do
-        put "/v1/organizations/#{organization_id}",
-            params: create_request('organizations', valid_attributes)
+        patch "/v1/organizations/#{organization_id}",
+            params: create_request('organizations', valid_attributes),
+            headers: user.create_new_auth_token
       end
 
       it 'updates the record' do
@@ -101,10 +115,38 @@ RSpec.describe 'organizations API', type: :request do
 
   # Test suite for DELETE /v1/organizations/:id
   describe 'DELETE /v1/organizations/:id' do
-    before { delete "/v1/organizations/#{organization_id}" }
+    before do
+      delete "/v1/organizations/#{organization_id}", headers: user.create_new_auth_token
+    end
 
     it 'returns status code 204' do
       expect(response).to have_http_status(204)
+    end
+  end
+
+  describe 'Unauthenticated requests' do
+    context 'GET /v1/organizations/:id' do
+      before { get v1_organization_path(organizations.first) }
+
+      include_examples 'unauthenticated request'
+    end
+
+    context 'POST /v1/organizations' do
+      before { post v1_organizations_path }
+
+      include_examples 'unauthenticated request'
+    end
+
+    context 'PATCH /v1/organizations/:id' do
+      before { patch v1_organization_path(organizations.first) }
+
+      include_examples 'unauthenticated request'
+    end
+
+    context 'DELETE /v1/organizations/:id' do
+      before { delete v1_organization_path(organizations.first) }
+
+      include_examples 'unauthenticated request'
     end
   end
 end
