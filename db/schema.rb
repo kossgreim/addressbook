@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20170216201745) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_organizations_on_name", using: :btree
   end
 
   create_table "users", force: :cascade do |t|

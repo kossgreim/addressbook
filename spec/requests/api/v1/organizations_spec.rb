@@ -4,13 +4,13 @@ RSpec.describe 'organizations API', type: :request do
   # initialize test data
   let!(:organizations) { create_list(:organization, 5) }
   let(:organization_id) { organizations.first.id.to_s }
-  let(:user) { create(:user) }
+  let(:user) { create(:user, organization: organizations.first) }
 
   # Test suite for GET /v1/organizations
   describe 'GET /v1/organizations' do
     # make HTTP get request before each example
     before do
-      get v1_organizations_path, headers: user.create_new_auth_token
+      get v1_organizations_path, headers: authorized_json_request(user)
     end
 
     it 'returns organizations' do
@@ -27,7 +27,7 @@ RSpec.describe 'organizations API', type: :request do
   # Test suite for GET /v1/organizations/:id
   describe 'GET /v1/organizations/:id' do
     before do
-      get "/v1/organizations/#{organization_id}",  headers: user.create_new_auth_token
+      get "/v1/organizations/#{organization_id}",  headers: authorized_request(user)
     end
 
     context 'when the record exists' do
@@ -63,7 +63,7 @@ RSpec.describe 'organizations API', type: :request do
       before do
         post '/v1/organizations',
              params: create_request('organizations', valid_attributes),
-             headers: user.create_new_auth_token
+             headers: authorized_request(user)
       end
 
       it 'creates a organization' do
@@ -100,7 +100,7 @@ RSpec.describe 'organizations API', type: :request do
       before do
         patch "/v1/organizations/#{organization_id}",
             params: create_request('organizations', valid_attributes),
-            headers: user.create_new_auth_token
+            headers: authorized_request(user)
       end
 
       it 'updates the record' do

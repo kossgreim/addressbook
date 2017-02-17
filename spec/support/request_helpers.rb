@@ -19,4 +19,15 @@ module Requests
       json['data']['attributes'][name]
     end
   end
+
+  module Headers
+
+    def authorized_request(user)
+      user.create_new_auth_token
+    end
+
+    def authorized_json_request(user)
+      authorized_request(user).merge({ 'Content-Type' => 'application/vnd.api+json' })
+    end
+  end
 end

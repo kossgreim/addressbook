@@ -50,6 +50,7 @@ RSpec.configure do |config|
 
   config.include Requests::JsonHelpers, type: :request
   config.include Requests::JsonAPI, type: :request
+  config.include Requests::Headers, type: :request
 
   # Setup database cleaner
   config.before(:suite) do
@@ -62,5 +63,4 @@ RSpec.configure do |config|
       example.run
     end
   end
-
 end
