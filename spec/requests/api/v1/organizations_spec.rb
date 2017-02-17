@@ -5,12 +5,13 @@ RSpec.describe 'organizations API', type: :request do
   let!(:organizations) { create_list(:organization, 5) }
   let(:organization_id) { organizations.first.id.to_s }
   let(:user) { create(:user, organization: organizations.first) }
+  let(:admin) { create(:admin, organization: organizations.first) }
 
   # Test suite for GET /v1/organizations
   describe 'GET /v1/organizations' do
     # make HTTP get request before each example
     before do
-      get v1_organizations_path, headers: authorized_json_request(user)
+      get v1_organizations_path, headers: authorized_json_request(admin)
     end
 
     it 'returns organizations' do
@@ -27,7 +28,7 @@ RSpec.describe 'organizations API', type: :request do
   # Test suite for GET /v1/organizations/:id
   describe 'GET /v1/organizations/:id' do
     before do
-      get "/v1/organizations/#{organization_id}",  headers: authorized_request(user)
+      get "/v1/organizations/#{organization_id}",  headers: authenticated_request(admin)
     end
 
     context 'when the record exists' do
@@ -63,7 +64,7 @@ RSpec.describe 'organizations API', type: :request do
       before do
         post '/v1/organizations',
              params: create_request('organizations', valid_attributes),
-             headers: authorized_request(user)
+             headers: authenticated_request(admin)
       end
 
       it 'creates a organization' do
@@ -79,7 +80,7 @@ RSpec.describe 'organizations API', type: :request do
       before do
         post '/v1/organizations',
              params: create_request('organizations', { name: '1' }),
-             headers: user.create_new_auth_token
+             headers: admin.create_new_auth_token
       end
 
       it 'returns status code 422' do
@@ -100,7 +101,7 @@ RSpec.describe 'organizations API', type: :request do
       before do
         patch "/v1/organizations/#{organization_id}",
             params: create_request('organizations', valid_attributes),
-            headers: authorized_request(user)
+            headers: authenticated_request(admin)
       end
 
       it 'updates the record' do
@@ -116,7 +117,7 @@ RSpec.describe 'organizations API', type: :request do
   # Test suite for DELETE /v1/organizations/:id
   describe 'DELETE /v1/organizations/:id' do
     before do
-      delete "/v1/organizations/#{organization_id}", headers: user.create_new_auth_token
+      delete "/v1/organizations/#{organization_id}", headers: admin.create_new_auth_token
     end
 
     it 'returns status code 204' do
@@ -124,6 +125,34 @@ RSpec.describe 'organizations API', type: :request do
     end
   end
 
+  # Test suit when user is not authorized to perform action
+  describe 'Unauthorized requests' do
+    context 'GET /v1/organizations/:id' do
+      before { get v1_organization_path(organizations.first), headers: authenticated_request(user) }
+
+      include_examples 'unauthorized request'
+    end
+
+    context 'POST /v1/organizations' do
+      before { post v1_organizations_path, headers: authenticated_request(user) }
+
+      include_examples 'unauthorized request'
+    end
+
+    context 'PATCH /v1/organizations/:id' do
+      before { patch v1_organization_path(organizations.first), headers: authenticated_request(user) }
+
+      include_examples 'unauthorized request'
+    end
+
+    context 'DELETE /v1/organizations/:id' do
+      before { delete v1_organization_path(organizations.first), headers: authenticated_request(user) }
+
+      include_examples 'unauthorized request'
+    end
+  end
+
+  # Test suit to test unauthenticated (when user is not signed in)
   describe 'Unauthenticated requests' do
     context 'GET /v1/organizations/:id' do
       before { get v1_organization_path(organizations.first) }

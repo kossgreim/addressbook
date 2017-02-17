@@ -1,6 +1,6 @@
 module Api::V1
   class OrganizationsController < ApiController
-    before_action :authenticate_v1_user!, except: [:index]
+    before_action :authenticate_user!, except: [:index]
     before_action :set_organization, only: [:show, :update, :destroy]
     include PaginationParams
 
@@ -11,13 +11,14 @@ module Api::V1
     end
 
     def show
-      organization = Organization.find(params[:id])
+      authorize @organization
 
-      render json: organization
+      render json: @organization
     end
 
     def create
       organization = Organization.new(organization_params)
+      authorize organization
 
       if organization.save
         render json: organization, status: :created
@@ -27,6 +28,7 @@ module Api::V1
     end
 
     def update
+      authorize @organization
       if @organization.update_attributes(organization_params)
         render json: @organization, status: :ok
       else
@@ -35,6 +37,7 @@ module Api::V1
     end
 
     def destroy
+      authorize @organization
       @organization.destroy
       head 204
     end

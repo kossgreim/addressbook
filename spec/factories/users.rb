@@ -6,5 +6,9 @@ FactoryGirl.define do
     email { Faker::Internet.email }
     password { Faker::Internet.password(8, 20) }
     association :organization
+
+    factory :admin do
+      admin true
+    end
   end
 end

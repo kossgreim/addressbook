@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users, skip: [:sessions, :registrations, :passwords]
   # API v1 routes
   scope module: 'api' do
     namespace :v1 do
