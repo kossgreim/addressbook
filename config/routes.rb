@@ -6,7 +6,9 @@ Rails.application.routes.draw do
       mount_devise_token_auth_for 'User', at: 'auth', skip: [:omniauth_callbacks], controllers: {
           registrations:  'api/v1/overrides/registrations'
       }
-      resources :organizations
+      resources :organizations do
+        resources :contacts
+      end
     end
   end
 end
