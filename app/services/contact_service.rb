@@ -47,24 +47,21 @@ class ContactService
   def find_by_organization(organization_id, args={})
     path = get_path(organization_id)
     contacts = handle_response(@client.get(path, args))
-    arr = []
-    # we return an empty array if we didn't get any contacts
-    return arr unless contacts.present?
-    # wrapping data data with Contact model
-    contacts.each do |id, contact|
+
+    # return an empty array if didn't get any contacts
+    return [] unless contacts
+
+    # Wrap each item with Contact
+    contacts.each_with_object([]) do |(id, contact), arr|
       arr << set_contact_data(contact, id)
     end
-
-    arr
   end
 
   private
 
   # handles firebase database's response
   def handle_response(response)
-    return false unless response.success?
-
-    response.body
+    response.body if response.success?
   end
 
   # wraps data with Contact model
