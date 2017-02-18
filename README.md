@@ -1,24 +1,22 @@
-# README
+# AddressBook test app
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Getting started
 
-Things you may want to cover:
+### Downloading the project
 
-* Ruby version
+First, download the app from this repository
 
-* System dependencies
+<p>
+   $ git clone https://github.com/kossgreim/addressbook.git
+   $ cd addressbook
+   $ bundle install
+</p>
 
-* Configuration
+### Database
+<p>After that, you'll need to set up your database, 
+so go to <code>config/database.yml</code> and setup with your database user data<p/>
+<p>AddressBook uses PostgresSQL and Firebase Realtime Database</p>
 
-* Database creation
 
-* Database initialization
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
