@@ -4,4 +4,5 @@ VCR.configure do |c|
   # HTTP request service.
   c.hook_into :webmock
   c.filter_sensitive_data("ENV['FIREBASE_API_KEY']") { ENV['FIREBASE_API_KEY'] }
+  c.filter_sensitive_data("ENV['FIREBASE_DATABASE_URL']") { ENV['FIREBASE_DATABASE_URL'] }
 end

@@ -2,17 +2,17 @@
 http_interactions:
 - request:
     method: patch
-    uri: https://addressbook-6cb10.firebaseio.com/contacts/organization_2/-KdHcMyGDgNj9hrpHaRi.json?auth=ENV['FIREBASE_API_KEY']
+    uri: ENV['FIREBASE_DATABASE_URL']contacts/organization_2/-KdHgfrwLlTlNUNS5Z_B.json?auth=ENV['FIREBASE_API_KEY']
     body:
       encoding: UTF-8
-      string: '{"first_name":"Robert","last_name":"Smith","email":"john@smith123.corp","phone":"444433322556","author_id":1,"organization_id":2,"id":"-KdHcMyGDgNj9hrpHaRi"}'
+      string: '{"first_name":"Robert","last_name":"Smith","email":"john@smith123.corp","phone":"444433322556","author_id":1,"organization_id":2,"id":"-KdHgfrwLlTlNUNS5Z_B"}'
     headers:
       User-Agent:
       - HTTPClient/1.0 (2.8.3, ruby 2.3.1 (2016-04-26))
       Accept:
       - "*/*"
       Date:
-      - Sat, 18 Feb 2017 19:10:00 GMT
+      - Sat, 18 Feb 2017 19:28:50 GMT
       Content-Type:
       - application/json
   response:
@@ -23,7 +23,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Sat, 18 Feb 2017 19:10:00 GMT
+      - Sat, 18 Feb 2017 19:28:50 GMT
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
@@ -38,7 +38,7 @@ http_interactions:
       - max-age=31556926; includeSubDomains; preload
     body:
       encoding: UTF-8
-      string: '{"first_name":"Robert","email":"john@smith123.corp","id":"-KdHcMyGDgNj9hrpHaRi","last_name":"Smith","organization_id":2,"author_id":1,"phone":"444433322556"}'
+      string: '{"first_name":"Robert","email":"john@smith123.corp","id":"-KdHgfrwLlTlNUNS5Z_B","last_name":"Smith","organization_id":2,"author_id":1,"phone":"444433322556"}'
     http_version: 
-  recorded_at: Sat, 18 Feb 2017 19:10:00 GMT
+  recorded_at: Sat, 18 Feb 2017 19:28:50 GMT
 recorded_with: VCR 3.0.3
