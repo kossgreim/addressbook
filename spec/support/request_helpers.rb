@@ -30,4 +30,12 @@ module Requests
       authenticated_request(user).merge({'Content-Type' => 'application/vnd.api+json' })
     end
   end
+
+  module Contacts
+    def create_contact
+      service = ContactService.new
+      contact = Contact.new(attributes_for(:contact))
+      service.create(contact, contact.organization_id)
+    end
+  end
 end

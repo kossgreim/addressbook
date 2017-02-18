@@ -53,6 +53,7 @@ RSpec.configure do |config|
   config.include Requests::JsonHelpers, type: :request
   config.include Requests::JsonAPI, type: :request
   config.include Requests::Headers, type: :request
+  config.include Requests::Contacts, type: :request
   config.include ServiceHelpers::ContactService, type: :service
 
   # Setup database cleaner
