@@ -52,8 +52,8 @@ module Api::V1
     private
 
     def contact_params
-      params = permit_params([:first_name, :last_name, :email, :phone, :organization_id])
-      params.merge({author_id: current_user.id})
+      allowed_params = permit_params([:first_name, :last_name, :email, :phone])
+      allowed_params.merge({author_id: current_user.id, organization_id: params[:organization_id]})
     end
 
     def set_service
