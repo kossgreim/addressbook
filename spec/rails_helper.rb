@@ -7,7 +7,9 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'devise'
 require 'database_cleaner'
+require 'webmock/rspec'
 
+WebMock.disable_net_connect!(allow_localhost: true)
 
 # Include support folder
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
@@ -51,6 +53,7 @@ RSpec.configure do |config|
   config.include Requests::JsonHelpers, type: :request
   config.include Requests::JsonAPI, type: :request
   config.include Requests::Headers, type: :request
+  config.include ServiceHelpers::ContactService, type: :service
 
   # Setup database cleaner
   config.before(:suite) do
