@@ -1,30 +1,9 @@
-class Contact
-  include ActiveModel::Model
-  include ActiveModel::Serialization
-  attr_accessor :id, :first_name, :last_name, :email, :phone, :organization_id
+class Contact < FreeModel
+  attr_accessor :id, :first_name, :last_name, :email, :phone, :organization_id, :author_id
 
-  def attributes
-    @attributes
-  end
+  validates :first_name, :last_name, presence: true, length: { in: 2..50 }
+  validates_format_of :email, :with => /@/
+  validates :phone, length: { in: 8..25 }, allow_blank: true
+  validates_numericality_of :organization_id, :author_id, only_integer: true
 
-  def attributes=(attributes)
-    set_attributes(attributes)
-  end
-
-  def initialize(attributes = {})
-    @attributes = {}
-
-    set_attributes(attributes)
-  end
-
-  private
-
-  def set_attributes(attributes)
-    attributes.each do |name, value|
-      if respond_to?(name.to_sym)
-        send("#{name}=", value)
-        @attributes[name.to_sym] = value
-      end
-    end
-  end
 end
