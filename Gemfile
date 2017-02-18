@@ -32,6 +32,7 @@ gem 'pundit'
 gem 'rack-attack'
 gem 'kaminari'
 gem 'dotenv-rails'
+gem 'firebase'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
