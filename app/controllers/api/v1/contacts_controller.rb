@@ -19,12 +19,12 @@ module Api::V1
     def create
       contact = Contact.new(contact_params)
       if contact.validate
-        contact = @service.create(contact)
+        contact = @service.create(contact, params[:organization_id])
         head :bad_gateway unless contact
 
         render json: contact, status: :created
       else
-        render_error(contact, :unprocessed_entity)
+        render_error(contact, :unprocessable_entity)
       end
     end
 
@@ -36,7 +36,7 @@ module Api::V1
 
         render json: result, status: :ok
       else
-
+        render_error(@contact, :unprocessable_entity)
       end
     end
 
@@ -52,7 +52,8 @@ module Api::V1
     private
 
     def contact_params
-      permit_params([:first_name, :last_name, :email, :phone, :organization_id])
+      params = permit_params([:first_name, :last_name, :email, :phone, :organization_id])
+      params.merge({author_id: current_user.id})
     end
 
     def set_service
