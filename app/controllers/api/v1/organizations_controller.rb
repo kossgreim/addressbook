@@ -1,8 +1,10 @@
 module Api::V1
   class OrganizationsController < ApiController
+    include PaginationParams
+    include JsonApiParams
+
     before_action :authenticate_user!, except: [:index]
     before_action :set_organization, only: [:show, :update, :destroy]
-    include PaginationParams
 
     def index
       organizations = Organization.paginate(pagination_params)
@@ -49,7 +51,7 @@ module Api::V1
     end
 
     def organization_params
-      ActiveModelSerializers::Deserialization.jsonapi_parse(params)
+      permit_params([:name])
     end
   end
 end
