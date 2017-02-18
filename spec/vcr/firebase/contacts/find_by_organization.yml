@@ -1,0 +1,46 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://addressbook-6cb10.firebaseio.com/contacts/organization_1.json?auth=ENV['FIREBASE_API_KEY']
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      User-Agent:
+      - HTTPClient/1.0 (2.8.3, ruby 2.3.1 (2016-04-26))
+      Accept:
+      - "*/*"
+      Date:
+      - Sat, 18 Feb 2017 19:10:00 GMT
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sat, 18 Feb 2017 19:10:00 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '2006'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains; preload
+    body:
+      encoding: UTF-8
+      string: '{"-KdGh78niv_2kbEOWpXT":{"email":"welll@test.com","first_name":"What
+        the heck","last_name":"it works111111","organization_id":1},"-KdGhCzyI_qxmFXEVp1r":{"email":"supertest@test.com","first_name":"John","last_name":"Smith","organization_id":1},"-KdGlYqzniDTrJFhhANY":{"email":"supertest@test.com","first_name":"J242424ohn","last_name":"Smi234234th","organization_id":1,"user_id":1},"-KdGlyR8wOJR-pxhXCvM":{"email":"supertest@test.com","first_name":"J242424ohn","last_name":"Smi234234th","organization_id":1},"-KdGm34ywvIuYJJFoK59":{"author_id":1,"email":"supertest@test.com","first_name":"J242424ohn","last_name":"Smi234234th","organization_id":1},"-KdGmdcay2Z3mgqg1YJn":{"email":"supertest@test.com","first_name":"J242424ohn","last_name":"Smi234234th","organization_id":1},"-KdGmmmxLomlLUsayR1C":{"email":"supertest@test.com","first_name":"J242424ohn","last_name":"Smi234234th","organization_id":1},"-KdGmpbZcKqyCJghNRNP":{"email":"supertest@test.com","first_name":"J242424ohn","last_name":"Smi234234th","organization_id":1},"-KdGoyhnaSGXMS5E5p-A":{"created_at":1487431527283,"email":"supertest@test.com","first_name":"J242424ewrwrwrohn","last_name":"Smi234234th","organization_id":1},"-KdH7t9FHHiL46Mrs7Rf":{"author_id":1,"email":"supertest@test.com","first_name":"J242424ewrwrwrohn","last_name":"Smi234234th","organization_id":1},"-KdH8Y3TRgSOj3BE-0Fp":{"author_id":1,"email":"norm@sadasda.com","first_name":"J242424ewrwrwrohn","id":"-KdH8Y3TRgSOj3BE-0Fp","last_name":"Smi234234th","organization_id":1},"-KdHGGfgFhVx1ClCXSjn":{"author_id":1,"email":"keely@torphy.biz","first_name":"Kattie","last_name":"Mueller","organization_id":2,"phone":"867.647.8803"},"-KdHGVI4dB-6mNppV2zM":{"author_id":1,"email":"berniece_raynor@runolfon.net","first_name":"Jermey","last_name":"Huel","organization_id":2,"phone":"322-194-8651"},"-KdHLKRjV1HEFrSeq7Ek":{"author_id":1,"email":"elaina@dickinson.biz","first_name":"Norma","id":"-KdHLKRjV1HEFrSeq7Ek","last_name":"Kovacek","organization_id":2,"phone":"(241)
+        064-4260"}}'
+    http_version: 
+  recorded_at: Sat, 18 Feb 2017 19:10:00 GMT
+recorded_with: VCR 3.0.3
