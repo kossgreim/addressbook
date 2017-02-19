@@ -88,7 +88,7 @@ Request body example:
     {"email":"your@email.com", "password":"YourPasswordHere"}
 ```
 
-####In case of successful sign in, you'll receive:
+##### In case of successful sign in, you'll receive:
 
 - Status 200 OK
 
@@ -129,7 +129,7 @@ The authentication headers consists of the following params:
 
 **Info taken from [https://github.com/lynndylanhurley/devise_token_auth]*
 
-#### When sign in wasn't successful
+##### When sign in wasn't successful:
 
 In response you'll get:
 
@@ -163,7 +163,7 @@ with body:
 ```
 *How to get attribute **organization_id** you can find at **[Organizations](#organizations)**
 
-### When registration was successful
+##### When registration was successful:
 
 You'll receive:
 - Status 200 OK
@@ -190,3 +190,184 @@ You'll receive:
 ```
 
 ## Organizations
+
+### Getting list of organizations
+List of organizations is public, clients can provide for its users 
+the ability to choose an organization while for registration.
+
+To get the list of you need to send GET request to:
+
+>http://app_address/v1/organizations
+
+In response you'll get:
+
+- Status 200 OK
+- List of organizations
+
+example:
+
+```json
+    {
+      "data": [
+        {
+          "id": "1",
+          "type": "organizations",
+          "attributes": {
+            "name": "test"
+          }
+        },
+        {
+          "id": "2",
+          "type": "organizations",
+          "attributes": {
+            "name": "First Organization"
+          }
+        },
+        {
+          "id": "3",
+          "type": "organizations",
+          "attributes": {
+            "name": "First Organization Test"
+          }
+        }
+      ],
+      "links": {}
+    }
+```
+
+So you can use this list to choose organization for registration, for more info look at: **[Registration](#registration)**
+
+### Create a new organization
+**Admins only can perform this action**
+
+To create a new organization, you'll have to send POST request to:
+
+>http://add_address/v1/organizations
+
+__You must specify content type header:__ *Content-Type: application/vnd.api+json*
+
+With body:
+
+```json
+    {
+      "data":{
+        "type": "organizations",
+        "attributes": {
+          "name": "Your organization name"
+        }
+      }
+    }
+```
+
+##### When request was successful
+
+You'll get:
+
+- Status 201 Created
+- Organization JSON representation
+
+```json
+{
+  "data": {
+    "id": "4",
+    "type": "organizations",
+    "attributes": {
+      "name": "Your organization name"
+    }
+  }
+}
+```
+
+##### When request wasn't successful
+
+You'll get:
+
+- Status 422 Unprocessable Entity
+- Errors explanation (example)
+
+```json
+    {
+      "errors": [
+        {
+          "source": {
+            "pointer": "/data/attributes/name"
+          },
+          "detail": "is too short (minimum is 2 characters)"
+        }
+      ]
+    }
+```
+
+### Updating organizations
+**Admins only**
+
+To create a new organization, you'll have to send PATCH request to:
+
+>http://add_address/v1/organizations/:id
+
+__You must specify content type header:__ *Content-Type: application/vnd.api+json*
+
+With body:
+
+```json
+    {
+      "data":{
+        "type": "organizations",
+        "attributes": {
+          "name": "Your organization NEW name"
+        }
+      }
+    }
+```
+
+##### When request was successful
+
+You'll get:
+
+- Status 200 Ok
+- Updated organization JSON representation
+
+```json
+{
+  "data": {
+    "id": "4",
+    "type": "organizations",
+    "attributes": {
+      "name": "Your organization NEW name"
+    }
+  }
+}
+```
+
+##### When request wasn't successful
+
+You'll get:
+
+- Status 422 Unprocessable Entity
+- Errors explanation (example)
+
+```json
+    {
+      "errors": [
+        {
+          "source": {
+            "pointer": "/data/attributes/name"
+          },
+          "detail": "is too short (minimum is 2 characters)"
+        }
+      ]
+    }
+```
+
+### Deleting organizations
+**Admins only**
+
+To delete an organization, you'll have to send DELETE request to:
+
+>http://add_address/v1/organizations/:id
+
+##### After successful deleting
+
+You'll get:
+
+- Status 204 No Content
