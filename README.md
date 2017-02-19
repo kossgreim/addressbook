@@ -129,7 +129,7 @@ The authentication headers consists of the following params:
 
 **Info taken from [https://github.com/lynndylanhurley/devise_token_auth]*
 
-##### When sign in wasn't successful:
+#### When sign in wasn't successful:
 
 In response you'll get:
 
@@ -163,7 +163,7 @@ with body:
 ```
 *How to get attribute **organization_id** you can find at **[Organizations](#organizations)**
 
-##### When registration was successful:
+#### When registration was successful:
 
 You'll receive:
 - Status 200 OK
@@ -259,7 +259,7 @@ With body:
     }
 ```
 
-##### When request was successful
+#### When request was successful
 
 You'll get:
 
@@ -278,7 +278,7 @@ You'll get:
 }
 ```
 
-##### When request wasn't successful
+#### When request wasn't successful
 
 You'll get:
 
@@ -320,7 +320,7 @@ With body:
     }
 ```
 
-##### When request was successful
+#### When request was successful
 
 You'll get:
 
@@ -339,7 +339,7 @@ You'll get:
 }
 ```
 
-##### When request wasn't successful
+#### When request wasn't successful
 
 You'll get:
 
@@ -366,7 +366,7 @@ To delete an organization, you'll have to send DELETE request to:
 
 >http://add_address/v1/organizations/:id
 
-##### After successful deleting
+#### After successful deleting
 
 You'll get:
 
