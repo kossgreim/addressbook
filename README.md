@@ -1,22 +1,48 @@
 # AddressBook test app
 
-## Getting started
+## Installing
 
 ### Downloading the project
 
 First, download the app from this repository
 
-<p>
+```
    $ git clone https://github.com/kossgreim/addressbook.git
    $ cd addressbook
    $ bundle install
-</p>
+```
 
 ### Database
-<p>After that, you'll need to set up your database, 
-so go to <code>config/database.yml</code> and setup with your database user data<p/>
-<p>AddressBook uses PostgresSQL and Firebase Realtime Database</p>
+
+**Postgres**
+
+- Setup your config/database.yml file to work with your database
+- Setup your database by running those commands
+
+```
+$ rails db:create
+$ rails db:migrate
+$ rails db:seed
+```
+
+**Firebase**
+
+Create file .env in the root folder *(only for development)* <br/>
+
+```
+ENV['FIREBASE_API_KEY'] = 'your firebase database secret key'
+ENV['FIREBASE_DATABASE_URL'] = 'your database url'
+```
+
+For **production** don't store your variables in the .env because:
+
+>There are typically better ways to manage configuration in production environments- such as /etc/environment managed by Puppet or Chef, heroku config, etc.
 
 
+## Running the tests
 
+All the test are written using Rspec, so all you need to do to is to run this command:
 
+```
+$ bundle exec rspec
+```
