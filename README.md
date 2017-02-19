@@ -364,10 +364,183 @@ You'll get:
 
 To delete an organization, you'll have to send DELETE request to:
 
->http://add_address/v1/organizations/:id
+>http://app_address/v1/organizations/:id
 
 #### After successful deleting
 
 You'll get:
 
 - Status 204 No Content
+
+## Contacts
+
+### Get contacts list for an Organization
+
+To get the list of you need to send GET request to:
+
+>http://app_address/v1/organizations/:organization_id/contacts
+
+In response you'll get:
+
+- Status 200 OK
+- List of contacts for the organization
+
+example:
+
+```json
+    {
+      "data": [
+        {
+          "id": "-KdHomP_NKE5GyjiUP_B",
+          "type": "contacts",
+          "attributes": {
+            "first_name": "John",
+            "last_name": "Smith",
+            "email": "john@smith123.corp"
+          }
+        },
+        {
+          "id": "-KdHpGumWBogbu_EtCLs",
+          "type": "contacts",
+          "attributes": {
+            "first_name": "Mike",
+            "last_name": "Ross",
+            "email": "mike@ross.com"
+          }
+        }
+      ]
+    }
+```
+
+### Create a new contact
+
+To create a new contact, you'll have to send POST request to:
+
+>http://app_address/v1/organizations/:organization_id/contacts
+
+__You must specify content type header:__ *Content-Type: application/vnd.api+json*
+
+With body:
+
+```json
+    {
+      "data": 
+        {
+          "type": "contacts",
+          "attributes": {
+            "first_name": "Sheldon",
+            "last_name": "Cooper",
+            "email": "drsheldoncooper@yahoo.com"
+          }
+        }
+    }
+```
+
+#### When request was successful
+
+You'll get:
+
+- Status 201 Created
+- Contact JSON representation
+
+```json
+{
+  "data": {
+    "id": "-KdMYVq_WXNmIwF8OZmx",
+    "type": "contacts",
+    "attributes": {
+      "first_name": "Sheldon",
+      "last_name": "Cooper",
+      "email": "drsheldoncooper@yahoo.com"
+    }
+  }
+}
+```
+
+#### When request wasn't successful
+
+You'll get:
+
+- Status 422 Unprocessable Entity
+- Errors explanation (example)
+
+```json
+    {
+      "errors": [
+        {
+          "source": {
+            "pointer": "/data/attributes/last_name"
+          },
+          "detail": "is too short (minimum is 2 characters)"
+        }
+      ]
+    }
+```
+
+### Updating contact
+
+To update organization, you'll have to send PATCH request to:
+
+>http://app_address/v1/organizations/:organization_id/contacts/:id
+
+__You must specify content type header:__ *Content-Type: application/vnd.api+json*
+
+With body:
+
+```json
+    {
+      "data": 
+        {
+          "type": "contacts",
+          "attributes": {
+            "first_name": "Sheldon",
+            "last_name": "Shamy",
+            "email": "drsheldoncooper@yahoo.com"
+          }
+        }
+    }
+```
+
+#### When request was successful
+
+You'll get:
+
+- Status 200 Ok
+- Updated contact JSON representation
+
+```json
+    {
+      "data": {
+        "id": "-KdMYVq_WXNmIwF8OZmx",
+        "type": "contacts",
+        "attributes": {
+          "first_name": "Sheldon",
+          "last_name": "Shamy",
+          "email": "drsheldoncooper@yahoo.com"
+        }
+      }
+    }
+```
+
+### Deleting organizations
+
+To delete a contact, you'll have to send DELETE request to:
+
+>http://app_address/v1/organizations/:organization_id/contacts/:id
+
+#### After successful deleting
+
+You'll get:
+
+- Status 204 No Content
+
+<hr>
+
+## Built With
+
+* [Rails 5.0.1](http://rubyonrails.org/) - Framework used
+* [devise_token_auth](https://github.com/lynndylanhurley/devise_token_auth) - Token based authentication for Rails JSON APIs
+
+## Author
+
+- **Ivan Lukasevych**
