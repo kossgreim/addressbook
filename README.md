@@ -60,7 +60,7 @@ All the test are written using Rspec, so all you need to do to is to run this co
 ```
 $ bundle exec rspec
 ```
-# API Documentations
+# API Documentation
 
 ## Authorization
 
@@ -143,3 +143,50 @@ In response you'll get:
       ]
     }
 ```
+
+## Registration
+
+Send POST request to:
+__You must specify content type header:__ *Content-Type: application/vnd.api+json*
+>http://<app-ddress>/v1/auth
+
+with body:
+
+```json
+{
+	"first_name": "Name",
+	"last_name": "LastName",
+	"email": "youremail@example.com", 
+	"password": "yourStrongPassword",
+	"organization_id": 1
+}
+```
+*How to get attribute **organization_id** you can find at **[Organizations](#organizations)**
+
+### When registration was successful
+
+You'll receive:
+- Status 200 OK
+- Authorization data, see "Authentication headers example" at [Authorization](#authorization)
+- User's JSON representation in the response's body
+
+```json
+    {
+      "status": "success",
+      "data": {
+        "id": 3,
+        "email": "youremail@example.com",
+        "provider": "email",
+        "organization_id": 1,
+        "first_name": "Name",
+        "last_name": "LastName",
+        "uid": "youremail@example.com",
+        "created_at": "2017-02-19T14:07:58.006Z",
+        "updated_at": "2017-02-19T14:07:58.084Z",
+        "admin": false,
+        "type": "user"
+      }
+    }
+```
+
+## Organizations
