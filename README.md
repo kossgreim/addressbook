@@ -60,3 +60,86 @@ All the test are written using Rspec, so all you need to do to is to run this co
 ```
 $ bundle exec rspec
 ```
+# API Documentations
+
+## Authorization
+
+When you were setting up the application, I assume you run command
+
+```bash
+    $ rails db:seed
+```
+
+That command created an organization and admin account for you.
+So, now you have to ne all set to start using the app and be able to sign in.
+
+### Signing in
+Send a POST request to:
+
+__You must specify content type header:__ *Content-Type: application/vnd.api+json*
+
+> http://<app_address>/v1/auth/sign_in
+
+Requires email and password as params. This route will return a JSON representation of the user
+
+Request body example:
+
+```json
+    {"email":"your@email.com", "password":"YourPasswordHere"}
+```
+
+####In case of successful sign in, you'll receive:
+
+- Status 200 OK
+
+- Body:
+```json
+    {
+      "data": {
+        "id": 2,
+        "email": "admin@example.com",
+        "provider": "email",
+        "organization_id": 3,
+        "first_name": "Admin",
+        "last_name": "Admin",
+        "uid": "admin@example.com",
+        "admin": true,
+        "type": "user"
+      }
+    }
+```
+- You'll get authentication headers to be able to authorize yourself as a user for each request
+##### Authentication headers example:
+~~~
+"access-token": "wwwww",
+"token-type":   "Bearer",
+"client":       "xxxxx",
+"expiry":       "yyyyy",
+"uid":          "zzzzz"
+~~~
+
+The authentication headers consists of the following params:
+
+| param | description |
+|---|---|
+| **`access-token`** | This serves as the user's password for each request. A hashed version of this value is stored in the database for later comparison. This value should be changed on each request. |
+| **`client`** | This enables the use of multiple simultaneous sessions on different clients. (For example, a user may want to be authenticated on both their phone and their laptop at the same time.) |
+| **`expiry`** | The date at which the current session will expire. This can be used by clients to invalidate expired tokens without the need for an API request. |
+| **`uid`** | A unique value that is used to identify the user. This is necessary because searching the DB for users by their access token will make the API susceptible to timing attacks. |
+
+**Info taken from [https://github.com/lynndylanhurley/devise_token_auth]*
+
+#### When sign in wasn't successful
+
+In response you'll get:
+
+- Status 401
+- Body
+
+```json
+    {
+      "errors": [
+        "Invalid login credentials. Please try again."
+      ]
+    }
+```
