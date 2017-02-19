@@ -71,14 +71,14 @@ When you were setting up the application, I assume you run command
 ```
 
 That command created an organization and admin account for you.
-So, now you have to ne all set to start using the app and be able to sign in.
+So, now you're all set to start using the app and be able to sign in.
 
 ### Signing in
 Send a POST request to:
 
 __You must specify content type header:__ *Content-Type: application/vnd.api+json*
 
-> http://<app_address>/v1/auth/sign_in
+> http://app_address/v1/auth/sign_in
 
 Requires email and password as params. This route will return a JSON representation of the user
 
@@ -148,7 +148,7 @@ In response you'll get:
 
 Send POST request to:
 __You must specify content type header:__ *Content-Type: application/vnd.api+json*
->http://<app-ddress>/v1/auth
+>http://app_address/v1/auth
 
 with body:
 
@@ -242,7 +242,7 @@ So you can use this list to choose organization for registration, for more info 
 
 To create a new organization, you'll have to send POST request to:
 
->http://add_address/v1/organizations
+>http://app_address/v1/organizations
 
 __You must specify content type header:__ *Content-Type: application/vnd.api+json*
 
@@ -301,9 +301,9 @@ You'll get:
 ### Updating organizations
 **Admins only**
 
-To create a new organization, you'll have to send PATCH request to:
+To update organization, you'll have to send PATCH request to:
 
->http://add_address/v1/organizations/:id
+>http://app_address/v1/organizations/:id
 
 __You must specify content type header:__ *Content-Type: application/vnd.api+json*
 
