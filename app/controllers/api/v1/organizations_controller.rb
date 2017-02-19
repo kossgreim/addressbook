@@ -53,9 +53,5 @@ module Api::V1
     def organization_params
       permit_params([:name])
     end
-
-    def check_authorization
-      authorize current_user if current_user
-    end
   end
 end
