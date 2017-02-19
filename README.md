@@ -38,6 +38,20 @@ For **production** don't store your variables in the .env because:
 
 >There are typically better ways to manage configuration in production environments- such as /etc/environment managed by Puppet or Chef, heroku config, etc.
 
+<hr>
+<p>Also, add these rules in your Firebase console:</p>
+
+```json
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+      "contacts": {
+        ".indexOn": ["organization_id"]
+      }
+  }
+}
+```
 
 ## Running the tests
 
