@@ -76,9 +76,9 @@ So, now you're all set to start using the app and be able to sign in.
 ### Signing in
 Send a POST request to:
 
-__You must specify content type header:__ *Content-Type: application/vnd.api+json*
-
 > http://app_address/v1/auth/sign_in
+
+**You must specify content type header:** *Content-Type: application/vnd.api+json*
 
 Requires email and password as params. This route will return a JSON representation of the user
 
@@ -88,7 +88,7 @@ Request body example:
     {"email":"your@email.com", "password":"YourPasswordHere"}
 ```
 
-##### In case of successful sign in, you'll receive:
+#### In case of successful sign in, you'll receive:
 
 - Status 200 OK
 
@@ -109,6 +109,7 @@ Request body example:
     }
 ```
 - You'll get authentication headers to be able to authorize yourself as a user for each request
+
 ##### Authentication headers example:
 ~~~
 "access-token": "wwwww",
@@ -127,7 +128,7 @@ The authentication headers consists of the following params:
 | **`expiry`** | The date at which the current session will expire. This can be used by clients to invalidate expired tokens without the need for an API request. |
 | **`uid`** | A unique value that is used to identify the user. This is necessary because searching the DB for users by their access token will make the API susceptible to timing attacks. |
 
-**Info taken from [https://github.com/lynndylanhurley/devise_token_auth]*
+*Info taken from **[devise_token_auth](https://github.com/lynndylanhurley/devise_token_auth)**
 
 #### When sign in wasn't successful:
 
@@ -147,7 +148,9 @@ In response you'll get:
 ## Registration
 
 Send POST request to:
-__You must specify content type header:__ *Content-Type: application/vnd.api+json*
+
+**You must specify content type header:** *Content-Type: application/vnd.api+json*
+
 >http://app_address/v1/auth
 
 with body:
@@ -161,13 +164,13 @@ with body:
 	"organization_id": 1
 }
 ```
-*How to get attribute **organization_id** you can find at **[Organizations](#organizations)**
+How to get attribute **organization_id** you can find at **[Organizations](#organizations)**
 
 #### When registration was successful:
 
 You'll receive:
 - Status 200 OK
-- Authorization data, see "Authentication headers example" at [Authorization](#authorization)
+- Authorization data, see "Authentication headers example" at [Authorization](#authorization) for more details
 - User's JSON representation in the response's body
 
 ```json
@@ -192,10 +195,10 @@ You'll receive:
 ## Organizations
 
 ### Getting list of organizations
-List of organizations is public, clients can provide for its users 
-the ability to choose an organization while for registration.
+List of organizations is public an available, so clients can provide for its users 
+the ability to choose an organization for registration.
 
-To get the list of you need to send GET request to:
+To get the list, you need to send GET request to:
 
 >http://app_address/v1/organizations
 
@@ -235,7 +238,7 @@ example:
     }
 ```
 
-So you can use this list to choose organization for registration, for more info look at: **[Registration](#registration)**
+*You can use this list for registration, for more info look at: **[Registration](#registration)***
 
 ### Create a new organization
 **Admins only can perform this action**
@@ -244,7 +247,7 @@ To create a new organization, you'll have to send POST request to:
 
 >http://app_address/v1/organizations
 
-__You must specify content type header:__ *Content-Type: application/vnd.api+json*
+**You must specify content type header:** *Content-Type: application/vnd.api+json*
 
 With body:
 
@@ -264,7 +267,7 @@ With body:
 You'll get:
 
 - Status 201 Created
-- Organization JSON representation
+- Organization's JSON representation
 
 ```json
 {
@@ -283,7 +286,7 @@ You'll get:
 You'll get:
 
 - Status 422 Unprocessable Entity
-- Errors explanation (example)
+- Errors explanation
 
 ```json
     {
@@ -305,7 +308,7 @@ To update organization, you'll have to send PATCH request to:
 
 >http://app_address/v1/organizations/:id
 
-__You must specify content type header:__ *Content-Type: application/vnd.api+json*
+**You must specify content type header:** *Content-Type: application/vnd.api+json*
 
 With body:
 
@@ -325,7 +328,7 @@ With body:
 You'll get:
 
 - Status 200 Ok
-- Updated organization JSON representation
+- Updated organization's JSON representation
 
 ```json
 {
@@ -376,7 +379,7 @@ You'll get:
 
 ### Get contacts list for an Organization
 
-To get the list of you need to send GET request to:
+To get the list, you need to send GET request to:
 
 >http://app_address/v1/organizations/:organization_id/contacts
 
@@ -418,7 +421,7 @@ To create a new contact, you'll have to send POST request to:
 
 >http://app_address/v1/organizations/:organization_id/contacts
 
-__You must specify content type header:__ *Content-Type: application/vnd.api+json*
+**You must specify content type header:** *Content-Type: application/vnd.api+json*
 
 With body:
 
@@ -441,7 +444,7 @@ With body:
 You'll get:
 
 - Status 201 Created
-- Contact JSON representation
+- Contact's JSON representation
 
 ```json
 {
@@ -483,7 +486,7 @@ To update organization, you'll have to send PATCH request to:
 
 >http://app_address/v1/organizations/:organization_id/contacts/:id
 
-__You must specify content type header:__ *Content-Type: application/vnd.api+json*
+**You must specify content type header:** *Content-Type: application/vnd.api+json*
 
 With body:
 
@@ -506,7 +509,7 @@ With body:
 You'll get:
 
 - Status 200 Ok
-- Updated contact JSON representation
+- Updated contact's JSON representation
 
 ```json
     {
@@ -534,13 +537,13 @@ You'll get:
 
 - Status 204 No Content
 
-<hr>
 
-## Built With
+
+# Built With
 
 * [Rails 5.0.1](http://rubyonrails.org/) - Framework used
 * [devise_token_auth](https://github.com/lynndylanhurley/devise_token_auth) - Token based authentication for Rails JSON APIs
 
-## Author
+# Author
 
 - **Ivan Lukasevych**
