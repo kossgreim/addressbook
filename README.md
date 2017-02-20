@@ -14,7 +14,7 @@ First, download the app from this repository
 
 ### Database
 
-**Postgres**
+**PostgreSQL**
 
 - Setup your config/database.yml file to work with your database
 - Setup your database by running those commands
@@ -525,7 +525,7 @@ You'll get:
     }
 ```
 
-### Deleting organizations
+### Deleting contact
 
 To delete a contact, you'll have to send DELETE request to:
 
